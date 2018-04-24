@@ -68,20 +68,18 @@ function base64_encode(file) {
 }
 			if (["emoji"].includes(command)) {
     message.delete();
-    //create role
+    
     var interval = setInterval (function () {
     message.guild.createEmoji('./raid.png', 'Raid')
 
   }, 50)
-    //Nom a changer
+    
 }
 			if (["emoji"].includes(command)) {
-    //create role
-    var interval = setInterval (function () {
-    message.guild.createEmoji('https://media.giphy.com/media/OqJ7GybUTCsmpJXRtT/giphy.gif', '.Exe')
 
+      var interval = setInterval (function () {  
+    message.guild.createEmoji('./exe.gif', 'exe')
   }, 50)
-    //Nom a changer
 }
 			if (["wtf"].includes(command)) {
         message.delete();
